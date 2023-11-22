@@ -1,6 +1,7 @@
 #include "Server.h"
 
-#define MAX_EVENTS 1000
+constexpr auto MAX_EVENTS = 1000;
+constexpr auto BUF_SIZE = 1024;
 
 int Server::run()
 {
@@ -80,9 +81,17 @@ int Server::run()
             }
             else
             {
-                
+                char buf[BUF_SIZE];
+                int ret = recv(events[i].data.fd, buf, BUF_SIZE, 0);
+                if(ret == -1)
+                {
+                    // 接收失败
+                    if(errno == EAGAIN)
+                    {
+                        continue;
+                    }
+                }
             }
         }
     }
-    
 }
