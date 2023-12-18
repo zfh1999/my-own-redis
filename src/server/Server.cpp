@@ -3,7 +3,7 @@
 constexpr auto MAX_EVENTS = 1000;
 constexpr auto BUF_SIZE = 1024;
 
-int Server::run()
+int Server::Run()
 {
     int server_fd = socket(AF_INET, SOCK_STREAM, 0);
     if(server_fd < 0)
@@ -93,5 +93,14 @@ int Server::run()
                 }
             }
         }
+    }
+}
+
+int Server::InitServerSocket()
+{
+    serverSocket_ = socket(AF_INET, SOCK_STREAM, 0);
+    if(serverSocket_ < 0)
+    {
+        return serverSocket_;
     }
 }

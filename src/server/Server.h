@@ -9,8 +9,12 @@ class Server
 public:
     Server(int port);
     ~Server();
-    int run();
+    int Run();
 
 private:
     int port_;
+    int serverSocket_;
+
+private:
+    int InitServerSocket();
 };
