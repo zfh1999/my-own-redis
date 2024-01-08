@@ -57,7 +57,7 @@ target("my-own-redis")
 --    set_optimize("fastest")
 --
 --    -- add include search directories
---    add_includedirs("/usr/include", "/usr/local/include")
+--    add_ince 变成了 name:uccs，就需要对齐进行扩容了，对应的 SDS 结构如下：ludedirs("/usr/include", "/usr/local/include")
 --
 --    -- add link libraries and search directories
 --    add_links("tbox")
