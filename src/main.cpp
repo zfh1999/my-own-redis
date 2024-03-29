@@ -1,9 +1,13 @@
 #include <iostream>
 
-using namespace std;
+#include "server/Server.h"
 
-int main(int argc, char** argv)
-{
-    cout << "hello world!" << endl;
-    return 0;
+int main() {
+  Server server(9999);
+  
+  server.Init();
+  for(;;){
+	server.Run();
+  }
+  return 0;
 }

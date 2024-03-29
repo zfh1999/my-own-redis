@@ -2,7 +2,7 @@ add_rules("mode.debug", "mode.release")
 
 target("my-own-redis")
     set_kind("binary")
-    add_files("src/*.cpp")
+    add_files("src/*.cpp", "src/*/*.cpp")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
