@@ -5,19 +5,20 @@ constexpr auto BUF_SIZE = 1024;
 
 Server::Server(int port) {
   port_ = port;
-  events_ = new epoll_event[1000];
+  //events_ = new epoll_event[1000];
+  events_.resize(1000);
 }
 
 Server::~Server() {
   auto ret = close(server_fd_);
   if (ret) {
-    printerr(errno);
+    msg("cannot close server_fd");
   }
   ret = close(epoll_fd_);
   if (ret) {
-    printerr(errno);
+    msg("cannot close epoll_fd");
   }
-  delete[] events_;
+  //delete[] events_;
 }
 
 int Server::Init() {
@@ -65,7 +66,7 @@ int Server::Init() {
 int Server::Run() {
   epoll_event event;
   while (1) {
-    int events_num = epoll_wait(epoll_fd_, events_, MAX_EVENTS, -1);
+    int events_num = epoll_wait(epoll_fd_, events_.data(), MAX_EVENTS, -1);
     if (events_num == -1) {
       printerr(errno);
       return -1;
@@ -100,8 +101,10 @@ int Server::Run() {
         } else if (ret == 0) {
           std::cout << "clientFd=" << events_[i].data.fd
                     << " is disconnect! \n";
-          epoll_ctl(epoll_fd_, EPOLL_CTL_DEL, events_[i].data.fd, events_);
-		  continue;
+          epoll_ctl(epoll_fd_, EPOLL_CTL_DEL, events_[i].data.fd, NULL);
+		  shutdown(events_[i].data.fd, NULL);
+		  close(events_[i].data.fd);
+          continue;
         }
         std::cout << "clientFd=" << events_[i].data.fd
                   << ", msg=" << std::string(buf, ret) << '\n';

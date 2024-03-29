@@ -3,7 +3,17 @@
 #include <sys/epoll.h>
 #include <sys/socket.h>
 #include <unistd.h>
+
 #include <iostream>
+#include <vector>
+
+static void msg(const char* msg) { fprintf(stderr, "%s\n", msg); }
+
+static void die(const char* msg) {
+  int err = errno;
+  fprintf(stderr, "[%d] %s\n", err, msg);
+  abort();
+}
 
 template <typename T>
 static void println(const T& msg) {
@@ -31,5 +41,6 @@ class Server {
   int serverSocket_;
   int server_fd_;
   int epoll_fd_;
-  epoll_event* events_;
+  //epoll_event* events_;
+  std::vector<epoll_event> events_;
 };

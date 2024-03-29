@@ -4,10 +4,10 @@
 
 int main() {
   Server server(9999);
-  
+
   server.Init();
-  for(;;){
-	server.Run();
+  for (;;) {
+    server.Run();
   }
   return 0;
 }
