@@ -5,7 +5,7 @@ constexpr auto BUF_SIZE = 1024;
 
 Server::Server(int port) {
   port_ = port;
-  //events_ = new epoll_event[1000];
+  // events_ = new epoll_event[1000];
   events_.resize(1000);
 }
 
@@ -18,7 +18,7 @@ Server::~Server() {
   if (ret) {
     msg("cannot close epoll_fd");
   }
-  //delete[] events_;
+  // delete[] events_;
 }
 
 int Server::Init() {
@@ -102,8 +102,8 @@ int Server::Run() {
           std::cout << "clientFd=" << events_[i].data.fd
                     << " is disconnect! \n";
           epoll_ctl(epoll_fd_, EPOLL_CTL_DEL, events_[i].data.fd, NULL);
-		  shutdown(events_[i].data.fd, NULL);
-		  close(events_[i].data.fd);
+          shutdown(events_[i].data.fd, NULL);
+          close(events_[i].data.fd);
           continue;
         }
         std::cout << "clientFd=" << events_[i].data.fd
