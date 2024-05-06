@@ -1,7 +1,0 @@
-{
-    errdata = "\27[01m\27[Ksrc/server/Server.cpp:\27[m\27[K In member function ‘\27[01m\27[Kint Server::\27[01;32m\27[KInitServerSocket\27[m\27[K()\27[m\27[K’:\
-\27[01m\27[Ksrc/server/Server.cpp:90:1:\27[m\27[K \27[01;35m\27[Kwarning: \27[m\27[Kcontrol reaches end of non-void function [\27[01;35m\27[K-Wreturn-type\27[m\27[K]\
-   90 | \27[01;35m\27[K}\27[m\27[K\
-      | \27[01;35m\27[K^\27[m\27[K\
-"
-}
