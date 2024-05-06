@@ -102,7 +102,7 @@ int Server::Run() {
           std::cout << "clientFd=" << events_[i].data.fd
                     << " is disconnect! \n";
           epoll_ctl(epoll_fd_, EPOLL_CTL_DEL, events_[i].data.fd, NULL);
-          shutdown(events_[i].data.fd, NULL);
+          shutdown(events_[i].data.fd, 0);
           close(events_[i].data.fd);
           continue;
         }
